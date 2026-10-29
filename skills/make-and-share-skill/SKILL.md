@@ -62,11 +62,24 @@ Executor `tools["github-mcp-repo-writes-enabled"].push_files` with:
 ## 5. Get the skills.sh page made
 
 skills.sh makes a skill's page only after the skill is installed once. On your own cloud computer,
-in a new empty folder, run:
+in a new empty folder:
 
-```sh
-npx -y skills add noisemaker111/skills --skill <name> -y
-```
+1. Check the skill is valid:
+
+   ```sh
+   npx -y skills add noisemaker111/skills --list
+   ```
+
+   `<name>` must be in the list. If it is missing, the SKILL.md frontmatter is wrong (most often
+   `name` does not match the folder): fix it with another `push_files`, then check again.
+2. Install it once, which makes skills.sh create the page:
+
+   ```sh
+   npx -y skills add noisemaker111/skills --skill <name> -y
+   ```
+
+   It must end with `Done!` and leave `.agents/skills/<name>/SKILL.md` in the folder. Delete the
+   folder afterwards.
 
 The link is `https://skills.sh/noisemaker111/skills/<name>`. The page usually appears about 5
 minutes after that install. Open the link every 30 seconds, at most 16 times. It works when the
