@@ -12,6 +12,31 @@ improvise a different way to do the same thing.
 | --- | --- |
 | make and share skill | `make-and-share-skill` |
 | save this as a command, make this repeatable, make this a skill (about a flow just done) | the steps under "New commands" below |
+| reply `<text>` to this, post `<text>`, like this, repost this (anything that acts on X as Jon) | the steps under "Acting on X" below |
+
+## Acting on X
+
+Anything that posts, replies, likes, reposts or follows on X as Jon goes through Owl, which uses
+Jon's own signed-in Chrome. Never use the X plugin or any other tool for it. Read posts with the
+X plugin as usual.
+
+- "this" is the post Jon replied under when he tagged @bot (the parent of his reply), not his own
+  reply. Use its URL in the form `https://x.com/<handle>/status/<id>`.
+- When Jon's message names the action and the exact text ("reply hi to this"), that is his
+  approval: do it without asking again. If the text or the target is unclear, ask him first.
+
+1. Executor `tools.owl.interact_start` with `mode: "browser"`, `timeout_seconds: 180`, and the
+   task for the action:
+   - reply: `Open <post URL> in Chrome. Reply to that post, not to any other post, with exactly this text and nothing else: "<text>". Press the Reply button once. Then check that the reply shows under the post and stop. Do not like, repost, follow or open anything else.`
+   - post: `Open https://x.com/compose/post in Chrome. Write exactly this text and nothing else: "<text>". Press the Post button once. Then check that the post shows on the profile and stop. Do not like, repost, follow or open anything else.`
+   - like or repost: `Open <post URL> in Chrome. Press the <Like or Repost> button on that post once, and only on that post. Then check that it shows as done and stop. Do not reply, follow or open anything else.`
+2. Executor `tools.owl.answer` with the returned `call`. It gives the task id, or `offline` (Owl
+   is not running) or `refused` (remote tasks are off). On `offline` or `refused`, tell Jon and
+   stop. Do not retry, and do not fall back to the X plugin.
+3. Every 20 seconds, at most 12 times: `tools.owl.interact_status` with the task id, then
+   `tools.owl.answer` with that call. Stop at `done`, `blocked` or `failed`.
+4. Tell Jon in one line: done, or blocked or failed. Never press the button a second time
+   after `blocked` or `failed`: the post may already be up, so ask Jon to check.
 
 ## New commands
 

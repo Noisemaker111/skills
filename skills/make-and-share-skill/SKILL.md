@@ -89,7 +89,8 @@ repository". If it never works, tell Jon and stop: do not reply on X with a brok
 ## 6. Reply on X through Owl
 
 Post the reply only through Owl, which uses Jon's own signed-in Chrome. Never post with the X
-plugin or any other tool.
+plugin or any other tool. Jon asking for "make and share skill" is his approval for this reply:
+do not ask again.
 
 1. Executor `tools.owl.interact_start` with:
    - `mode`: `"browser"`
