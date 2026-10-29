@@ -59,12 +59,19 @@ Executor `tools["github-mcp-repo-writes-enabled"].push_files` with:
 - `files`: `[{ "path": "skills/<name>/SKILL.md", "content": "<the SKILL.md text>" }]`
 - `message`: `"Add <name> skill, adapted from <source post URL>"`
 
-## 5. Check the link
+## 5. Get the skills.sh page made
 
-The link is `https://skills.sh/noisemaker111/skills/<name>`. Open it. It works when the page shows
-the skill's SKILL.md. If the page says the skill "isn't available in this repository", wait 20
-seconds and open it again, at most 3 times. If it still fails, tell Jon and stop: do not reply on X
-with a broken link.
+skills.sh makes a skill's page only after the skill is installed once. On your own cloud computer,
+in a new empty folder, run:
+
+```sh
+npx -y skills add noisemaker111/skills --skill <name> -y
+```
+
+The link is `https://skills.sh/noisemaker111/skills/<name>`. The page usually appears about 5
+minutes after that install. Open the link every 30 seconds, at most 16 times. It works when the
+page shows the skill's SKILL.md; until then it says the skill "isn't available in this
+repository". If it never works, tell Jon and stop: do not reply on X with a broken link.
 
 ## 6. Reply on X through Owl
 
